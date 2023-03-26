@@ -1,6 +1,7 @@
 import cv2
 import torch
 from torchvision.transforms import transforms
+from siamese import BranchNetwork, SiameseNetwork
 
 # Create an instance of the BranchNetwork class
 branch = BranchNetwork()
