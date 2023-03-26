@@ -1,28 +1,32 @@
-import cv2
+# import cv2
 import torch
-from torchvision.transforms import transforms
+from torchvision import transforms
+from PIL import Image
 from siamese import BranchNetwork, SiameseNetwork
 
-# Create an instance of the BranchNetwork class
-branch = BranchNetwork()
+# Load image and convert to grayscale
+image = Image.open('001_AB_real_D (batchSize-7  - test_batch_7 - 30 epochs).png').convert('L')
+# image = cv2.imread("001_AB_real_D (batchSize-7  - test_batch_7 - 30 epochs).png")
 
-# Load an image
-img = cv2.imread("path/to/image.jpg")
-
-# Resize and normalize the image
+# Resize and normalize image
 transform = transforms.Compose([
-    transforms.ToPILImage(),
     transforms.Resize((180, 320)),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485], std=[0.229])
+    transforms.Normalize(mean=[0.5], std=[0.5])
 ])
-img = transform(img)
+image = transform(image)
 
-# Add batch dimension to the image
-img = img.unsqueeze(0)
+# Add batch dimension
+image = image.unsqueeze(0)
 
-# Pass the image through the BranchNetwork to get the feature vector
-features = branch(img)
+# Create Siamese network
+branch = BranchNetwork()
+siamese_network = SiameseNetwork(branch)
 
-# Print the shape of the feature vector
-print(features.shape)
+# Compute feature vector
+feature_vector = siamese_network.feature(image)
+
+# Convert to numpy array
+feature_vector = feature_vector.detach().numpy()
+
+print(feature_vector)
