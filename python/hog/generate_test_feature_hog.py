@@ -1,6 +1,4 @@
 # Generate HoG feature from testset edge images
-
-
 import cv2 as cv
 import scipy.io as sio
 import numpy as np
@@ -31,7 +29,7 @@ for i in range(n):
     feat = hog.compute(edge_image)
     features.append(feat)
 
-features = np.squeeze(np.asarray(features), axis=2)
+features = np.squeeze(np.asarray(features))
 
 print('feature dimension {}'.format(features.shape))
 

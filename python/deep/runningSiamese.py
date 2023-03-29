@@ -4,6 +4,9 @@ from torchvision import transforms
 from PIL import Image
 from siamese import BranchNetwork, SiameseNetwork
 
+# Loading images
+images = []
+
 # Load image and convert to grayscale
 image = Image.open('001_AB_real_D (batchSize-7  - test_batch_7 - 30 epochs).png').convert('L')
 # image = cv2.imread("001_AB_real_D (batchSize-7  - test_batch_7 - 30 epochs).png")

@@ -46,7 +46,7 @@ for i in range(n):
     if i%1000 == 0:
         print('finished {} examples in {}'.format(i+1, n))
 
-database_features = np.squeeze(np.asarray(database_features), axis=2)
+database_features = np.squeeze(np.asarray(database_features))
 
 print('feature dimension {}'.format(database_features.shape))
 

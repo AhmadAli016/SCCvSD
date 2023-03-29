@@ -1,5 +1,5 @@
 python network_test.py \
---edge-image-file '../../data/train_data_10k.mat' \
+--edge-image-file 'train_data_10k.mat' \
 --model-name 'network.pth' \
 --batch-size 64 \
 --cuda-id 0 \
