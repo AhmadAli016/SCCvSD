@@ -1,7 +1,7 @@
 import cv2 as cv
 import numpy as np
 
-from .projective_camera import ProjectiveCamera
+from projective_camera import ProjectiveCamera
 
 class IouUtil:
     @staticmethod
@@ -81,7 +81,7 @@ def ut_homography_warp():
 
 
     #homography_warp(h, image, dst_size, background_color):
-    template_size = (115, 74);
+    template_size = (115, 74)
     warped_im = IouUtil.homography_warp(inv_h, im, (115, 74), (0, 0, 0))
     cv.imwrite('warped_image.jpg', warped_im)
 
@@ -127,6 +127,16 @@ def ut_generate_grassland_mask():
 
     index = 16 - 1   # image index from 1
     data = sio.loadmat('../../data/UoT_soccer/train_val.mat')
+    # 'annotation' is just the image and its homography matrix
+    # list of 2 numpy arrays
+    # 1st array is image name
+    # 2nd array is the homography matrix
+    '''
+    example:
+    (array(['1.jpg'], dtype='<U5'), array([[-1.21251981e+00,  3.28724833e-02,  6.42376049e+01],
+         [-4.75631146e-03,  9.24672153e-03, -1.93638990e+01],
+         [-1.26068774e-04,  4.96264014e-04, -5.36250953e-02]]))
+    '''
     annotation = data['annotation']
     homo = annotation[0][index][1]  # ground truth homography
 
@@ -136,7 +146,7 @@ def ut_generate_grassland_mask():
     tempalte_im = np.ones((template_h, template_w, 1), dtype=np.uint8) * 255
 
     grass_mask = IouUtil.homography_warp(homo, tempalte_im, (1280, 720), (0));
-    cv.imshow('grass mask', grass_mask)
+    cv.imshow('grass mask.png', grass_mask)
     cv.waitKey(0)
 
     # step 2: generate a 'soft' grass mask
@@ -148,14 +158,14 @@ def ut_generate_grassland_mask():
     dist_im[dist_im > dist_threshold] = dist_threshold
     soft_mask = 1.0 - dist_im / dist_threshold  # normalize to [0, 1]
 
-    cv.imshow('soft mask', soft_mask)
+    cv.imshow('soft mask.png', soft_mask)
     cv.waitKey(0)
 
     # step 3: soft mask on the original image
     stacked_mask = np.stack((soft_mask,) * 3, axis=-1)
     im = cv.imread('../../data/16.jpg')
     soft_im = cv.multiply(stacked_mask, im.astype(np.float32)).astype(np.uint8)
-    cv.imshow('soft masked image', soft_im)
+    cv.imshow('soft masked image.png', soft_im)
     cv.waitKey(0)
 
 

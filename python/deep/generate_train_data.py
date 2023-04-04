@@ -13,8 +13,6 @@ save_file = 'train_data_10k.mat'
 pivot_cameras = pivot_cameras[0:n, :]
 positive_cameras = positive_cameras[0:n,:]
 
-
-
 data = sio.loadmat('../../data/worldcup2014.mat')
 print(data.keys())
 model_points = data['points']
