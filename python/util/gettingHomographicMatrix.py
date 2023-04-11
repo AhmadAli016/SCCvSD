@@ -35,16 +35,3 @@ print(h)
 print(warped_im)
 
 # ___________________________________________________
-
-# Define the camera parameters and model points
-camera_data = np.array([640, 360, 700, 0, 0, 0, 0, 0, 0])
-model_points = np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0]], dtype=np.float32)
-model_line_segment = np.array([[0, 1], [0, 2], [1, 3], [2, 3]])
-
-# Call the camera_to_edge_image function
-im2 = SyntheticUtil.camera_to_edge_image(camera_data, model_points, model_line_segment)
-
-# Display the resulting image
-cv.imshow('image', im2)
-cv.waitKey(0)
-cv.destroyAllWindows()

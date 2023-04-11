@@ -25,7 +25,7 @@ fl_max:
 """
 
 """
-worldcup_sampled_cameras.mat
+worldcup_sampled_cameras.mat 
 It has about ~90K positive camera pairs
 pivot_cameras: N * 9, pivot cameras used in training
 positive_cameras: N * 9, positive camera with the pivot camera

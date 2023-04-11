@@ -1,8 +1,8 @@
 import numpy as np
 import cv2 as cv
 
-from rotation_util import RotationUtil
-from projective_camera import ProjectiveCamera
+from .rotation_util import RotationUtil
+from .projective_camera import ProjectiveCamera
 
 class SyntheticUtil:
     @staticmethod
@@ -10,7 +10,7 @@ class SyntheticUtil:
                              model_points, model_line_segment,
                              im_h=720, im_w=1280, line_width=4):
         """
-         Project (line) model images using the camera
+        Project (line) model images using the camera
         :param camera_data: 9 numbers
         :param model_points:
         :param model_line_segment:
